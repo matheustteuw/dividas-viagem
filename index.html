@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dívidas da Viagem</title>
+<style>
+  :root { --bg:#f6f7fb; --card:#fff; --text:#1c2030; --muted:#6b7280; --ok:#16a34a; --warn:#d97706; --line:#e5e7eb; --btn:#2563eb; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0f1220; --card:#181c2e; --text:#e8eaf3; --muted:#9aa1b5; --line:#2a2f45; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.4 system-ui,sans-serif; background:var(--bg); color:var(--text); }
+  main { max-width:640px; margin:0 auto; padding:16px; }
+  h1 { font-size:1.4rem; margin:8px 0 4px; }
+  h2 { font-size:1.05rem; margin:24px 0 8px; }
+  .sub { color:var(--muted); font-size:.9rem; margin:0 0 12px; }
+  .item { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:8px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  .item b { font-weight:600; }
+  .meta { color:var(--muted); font-size:.85rem; }
+  .actions { display:flex; gap:6px; align-items:center; }
+  input[type=date], button { font:inherit; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text); }
+  button { cursor:pointer; background:var(--btn); color:#fff; border-color:var(--btn); }
+  button.ghost { background:transparent; color:var(--muted); border-color:var(--line); }
+  .tag-ok { color:var(--ok); font-weight:600; }
+  .count { color:var(--warn); } .count.ok { color:var(--ok); }
+  #err { color:#dc2626; }
+  .empty { color:var(--muted); padding:8px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>✈️ Dívidas da viagem</h1>
+  <p class="sub">Passagens no cartão do Matheus · Hospedagem no cartão da Isa</p>
+  <p id="err"></p>
+
+  <h2>⏳ Falta pagar <span id="nPend" class="count"></span></h2>
+  <div id="pend"></div>
+
+  <h2>✅ Já pagaram <span id="nPaid" class="count ok"></span></h2>
+  <div id="paid"></div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const brl = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const fmt = (d) => d.split('-').reverse().join('/');
+const today = () => new Date().toLocaleDateString('sv'); // AAAA-MM-DD no fuso local
+const esc = (s) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+async function api(body) {
+  const r = await fetch('/api/payments', body && { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error);
+  return data.items;
+}
+
+function row(i) {
+  const left = `<div><b>${esc(i.from)}</b> → <b>${esc(i.to)}</b> · ${brl(i.amount)}<div class="meta">${esc(i.motivo)} · ${esc(i.parcela)}</div></div>`;
+  const right = i.paidAt
+    ? `<div class="actions"><span class="tag-ok">Pago em ${fmt(i.paidAt)}</span><button class="ghost" data-undo="${esc(i.id)}">Desfazer</button></div>`
+    : `<div class="actions"><input type="date" value="${today()}"><button data-pay="${esc(i.id)}">Confirmar</button></div>`;
+  return `<div class="item">${left}${right}</div>`;
+}
+
+function render(items) {
+  const pend = items.filter((i) => !i.paidAt), paid = items.filter((i) => i.paidAt);
+  $('pend').innerHTML = pend.map(row).join('') || '<div class="empty">Tudo pago! 🎉</div>';
+  $('paid').innerHTML = paid.map(row).join('') || '<div class="empty">Ninguém pagou ainda.</div>';
+  $('nPend').textContent = `(${pend.length})`;
+  $('nPaid').textContent = `(${paid.length})`;
+}
+
+async function run(p) {
+  $('err').textContent = '';
+  try { render(await p); } catch (e) { $('err').textContent = 'Erro: ' + e.message; }
+}
+
+document.addEventListener('click', (e) => {
+  const pay = e.target.dataset.pay, undo = e.target.dataset.undo;
+  if (pay) run(api({ id: pay, date: e.target.previousElementSibling.value || today() }));
+  if (undo) run(api({ id: undo, date: null }));
+});
+
+run(api());
+</script>
+</body>
+</html>
