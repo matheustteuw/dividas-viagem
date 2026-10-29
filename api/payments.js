@@ -1,8 +1,8 @@
 // Lista de parcelas (fonte única). Para mudar valores/pessoas, edite aqui.
-const PESSOAS = ['2t bigode', 'Laryssa', 'Gabriela', 'Victor', 'Isabelly'];
+const PESSOAS = ['2t bigode', 'Arthur', 'Laryssa', 'Gabi', 'Victor', 'Isa'];
 const PLANOS = [
   { to: '2t bigode', amount: 112, motivo: 'Passagens (cartão do 2t bigode)', parcelas: ['05/11', '05/12'] },
-  { to: 'Isabelly', amount: 145, motivo: 'Hospedagem (cartão da Isa)', parcelas: ['08/11', '08/12'] },
+  { to: 'Isa', amount: 145, motivo: 'Hospedagem (cartão da Isa)', parcelas: ['08/11', '08/12'] },
 ];
 
 const ITEMS = PLANOS.flatMap((p) =>
