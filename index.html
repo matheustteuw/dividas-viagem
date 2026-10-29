@@ -2,92 +2,120 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f6fa">
 <title>Dívidas da Viagem</title>
 <style>
   :root {
-    --bg:#f4f5f9; --card:#fff; --text:#171a2b; --muted:#7a8095; --line:#e8eaf1;
-    --brand:#4f46e5; --brand-soft:#eef0ff; --ok:#16a34a; --ok-soft:#e8f7ee; --warn:#d97706; --warn-soft:#fef3e2; --danger:#dc2626;
-    --shadow:0 1px 2px rgba(20,24,50,.04), 0 6px 20px rgba(20,24,50,.05);
+    --bg:#f5f6fa; --card:#fff; --text:#111827; --muted:#6b7280; --line:#eceef3; --fill:#f3f4f8;
+    --brand:#4338ca; --brand-soft:#eef0ff; --ok:#059669; --ok-soft:#e7f7f0; --warn:#b45309; --warn-soft:#fdf3e1; --danger:#dc2626;
+    --shadow:0 1px 2px rgba(17,24,39,.04), 0 8px 24px rgba(17,24,39,.06);
+    --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#0e1020; --card:#171a2e; --text:#eceefa; --muted:#8b92ab; --line:#262a44;
-      --brand:#818cf8; --brand-soft:#23274a; --ok:#4ade80; --ok-soft:#14301f; --warn:#fbbf24; --warn-soft:#3a2b10; --shadow:none; }
+    :root { --bg:#0b0d17; --card:#151827; --text:#f1f2f9; --muted:#8e94ab; --line:#232740; --fill:#1d2136;
+      --brand:#8b93ff; --brand-soft:#232853; --ok:#34d399; --ok-soft:#10302a; --warn:#fbbf24; --warn-soft:#33270f; --shadow:none; }
   }
-  * { box-sizing:border-box; }
-  body { margin:0; font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); }
-  main { max-width:560px; margin:0 auto; padding:24px 16px 80px; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); }
+  main { max-width:520px; margin:0 auto; padding:calc(28px + var(--safe-t)) 16px calc(48px + var(--safe-b)); }
+  svg { width:18px; height:18px; flex:none; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 
-  header h1 { font-size:1.5rem; margin:0; letter-spacing:-.02em; }
-  header p { margin:4px 0 0; color:var(--muted); font-size:.9rem; }
+  header { margin-bottom:20px; }
+  header h1 { font-size:1.6rem; line-height:1.15; margin:0; letter-spacing:-.03em; }
+  header p { margin:6px 0 0; color:var(--muted); font-size:.9rem; }
 
-  .summary { background:var(--card); border-radius:20px; padding:20px; margin:20px 0; box-shadow:var(--shadow); }
-  .stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .stat small { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; }
-  .stat strong { display:block; font-size:1.5rem; letter-spacing:-.02em; }
+  .card { background:var(--card); border-radius:20px; box-shadow:var(--shadow); border:1px solid var(--line); }
+
+  .summary { padding:20px; margin-bottom:20px; }
+  .stats { display:grid; grid-template-columns:1fr 1px 1fr; gap:16px; }
+  .stats hr { border:0; background:var(--line); margin:0; }
+  .stat small { display:block; color:var(--muted); font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; }
+  .stat strong { display:block; font-size:1.55rem; letter-spacing:-.03em; margin-top:2px; font-variant-numeric:tabular-nums; }
   .stat.pend strong { color:var(--warn); } .stat.paid strong { color:var(--ok); }
-  .bar { height:8px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:16px; }
-  .bar i { display:block; height:100%; background:linear-gradient(90deg,var(--brand),var(--ok)); border-radius:99px; transition:width .4s; }
+  .bar { height:8px; background:var(--fill); border-radius:99px; overflow:hidden; margin-top:18px; }
+  .bar i { display:block; height:100%; background:var(--ok); border-radius:99px; transition:width .5s cubic-bezier(.4,0,.2,1); }
   .bar-label { color:var(--muted); font-size:.8rem; margin-top:8px; }
 
-  .tabs { display:flex; background:var(--line); border-radius:12px; padding:4px; gap:4px; margin-bottom:16px; }
-  .tabs button { flex:1; border:0; background:transparent; color:var(--muted); font:inherit; font-weight:600; padding:9px; border-radius:9px; cursor:pointer; }
-  .tabs button.on { background:var(--card); color:var(--text); box-shadow:var(--shadow); }
+  .tabs { display:grid; grid-template-columns:1fr 1fr; background:var(--fill); border-radius:14px; padding:4px; margin-bottom:16px; }
+  .tabs button { border:0; background:transparent; color:var(--muted); font:inherit; font-weight:600; padding:11px 8px; border-radius:11px; cursor:pointer; min-height:44px; }
+  .tabs button.on { background:var(--card); color:var(--text); box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .tabs b { font-weight:600; opacity:.55; margin-left:4px; }
 
-  .group { background:var(--card); border-radius:20px; box-shadow:var(--shadow); margin-bottom:16px; overflow:hidden; }
-  .group-h { padding:16px 18px 12px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
-  .group-h b { font-size:1rem; } .group-h span { color:var(--muted); font-size:.82rem; }
-  .row { display:flex; align-items:center; gap:12px; padding:12px 18px; border-top:1px solid var(--line); }
-  .avatar { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; color:#fff; font-weight:700; flex:none; }
+  .group { margin-bottom:16px; overflow:hidden; }
+  .group-h { padding:16px; display:flex; align-items:center; gap:12px; }
+  .group-h .who b { font-size:1rem; }
+  .group-h .who small { display:block; color:var(--muted); font-size:.82rem; }
+  .row { display:flex; align-items:center; gap:12px; padding:14px 16px; border-top:1px solid var(--line); }
+  .avatar { width:40px; height:40px; border-radius:50%; display:grid; place-items:center; color:#fff; font-weight:700; flex:none; }
+  .group-h .avatar { width:44px; height:44px; }
   .who { flex:1; min-width:0; }
-  .who b { display:block; font-weight:600; }
-  .who small { color:var(--muted); }
-  .amount { font-weight:700; white-space:nowrap; }
-  .btn { border:0; font:inherit; font-weight:600; padding:8px 14px; border-radius:10px; cursor:pointer; background:var(--brand); color:#fff; }
+  .row .who b { display:block; font-weight:600; }
+  .row .who small { color:var(--muted); font-size:.82rem; }
+  .amount { font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; border:0; font:inherit; font-weight:600; padding:0 16px; min-height:40px; border-radius:12px; cursor:pointer; background:var(--brand); color:#fff; white-space:nowrap; }
+  .btn:active { transform:scale(.97); }
   .btn.soft { background:var(--brand-soft); color:var(--brand); }
-  .btn.ghost { background:transparent; color:var(--muted); border:1px solid var(--line); }
+  .btn.ghost { background:var(--fill); color:var(--muted); }
   .btn.ok { background:var(--ok); color:#fff; }
-  .btn:disabled { opacity:.5; cursor:wait; }
-  .badge { display:inline-block; font-size:.75rem; font-weight:600; padding:2px 8px; border-radius:99px; background:var(--warn-soft); color:var(--warn); }
-  .badge.ok { background:var(--ok-soft); color:var(--ok); }
-  .empty { text-align:center; color:var(--muted); padding:40px 0; }
+  .btn.sm { min-height:36px; padding:0 12px; font-size:.85rem; }
+  .btn:disabled { opacity:.5; }
+  .badge { font-size:.75rem; font-weight:600; padding:3px 9px; border-radius:99px; background:var(--ok-soft); color:var(--ok); }
+  .empty { text-align:center; color:var(--muted); padding:48px 0; }
 
-  dialog { border:0; border-radius:20px; padding:24px; width:min(92vw,400px); background:var(--card); color:var(--text); box-shadow:0 20px 60px rgba(0,0,0,.3); }
-  dialog::backdrop { background:rgba(10,12,30,.5); backdrop-filter:blur(2px); }
-  dialog h2 { margin:0 0 4px; font-size:1.2rem; }
-  dialog .detail { background:var(--bg); border-radius:14px; padding:14px; margin:14px 0; display:grid; gap:6px; }
-  dialog .detail div { display:flex; justify-content:space-between; gap:12px; } dialog .detail span { color:var(--muted); }
-  dialog label.field { display:block; font-size:.85rem; color:var(--muted); margin-bottom:12px; }
-  dialog input[type=date] { display:block; width:100%; margin-top:4px; font:inherit; padding:10px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--text); }
-  dialog label.check { display:flex; gap:10px; align-items:flex-start; font-size:.9rem; margin-bottom:18px; cursor:pointer; }
-  dialog label.check input { margin-top:3px; width:18px; height:18px; flex:none; }
-  .modal-actions { display:flex; gap:8px; } .modal-actions .btn { flex:1; padding:11px; }
+  dialog { border:0; padding:0; width:min(92vw,420px); border-radius:24px; background:var(--card); color:var(--text); box-shadow:0 24px 70px rgba(0,0,0,.35); }
+  dialog::backdrop { background:rgba(10,12,28,.5); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
+  dialog form { padding:22px 20px calc(20px + var(--safe-b)); }
+  dialog h2 { margin:0; font-size:1.2rem; letter-spacing:-.02em; }
+  .detail { background:var(--fill); border-radius:16px; padding:6px 14px; margin:16px 0; }
+  .detail div { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:9px 0; }
+  .detail div + div { border-top:1px solid var(--line); }
+  .detail span { color:var(--muted); font-size:.88rem; } .detail b { text-align:right; font-weight:600; }
+  .pix { display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--brand-soft); color:var(--brand); border-radius:16px; padding:12px 14px; margin-bottom:16px; }
+  .pix small { display:block; opacity:.8; font-size:.75rem; font-weight:600; } .pix b { font-size:.95rem; word-break:break-all; }
+  .field { display:block; font-size:.85rem; color:var(--muted); margin-bottom:14px; }
+  .field input { display:block; width:100%; margin-top:6px; font:inherit; font-size:16px; padding:12px; min-height:46px; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--text); }
+  .check { display:flex; gap:12px; align-items:flex-start; font-size:.92rem; margin-bottom:20px; cursor:pointer; }
+  .check input { margin:2px 0 0; width:22px; height:22px; flex:none; accent-color:var(--ok); }
+  .modal-actions { display:grid; grid-template-columns:1fr 1.6fr; gap:10px; } .modal-actions .btn { min-height:50px; }
 
-  #toasts { position:fixed; left:0; right:0; bottom:20px; display:grid; gap:8px; justify-items:center; pointer-events:none; padding:0 16px; }
-  .toast { background:#171a2b; color:#fff; padding:12px 18px; border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,.25); font-weight:500; animation:up .25s ease; }
-  .toast.ok { background:var(--ok); } .toast.err { background:var(--danger); }
-  @keyframes up { from { opacity:0; transform:translateY(12px); } }
+  #toasts { position:fixed; top:calc(12px + var(--safe-t)); left:0; right:0; display:grid; gap:8px; justify-items:center; pointer-events:none; padding:0 16px; z-index:99; }
+  .toast { display:flex; align-items:center; gap:12px; width:min(100%,420px); background:var(--card); color:var(--text); border:1px solid var(--line); padding:12px 16px 12px 12px; border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.18); font-weight:500; font-size:.92rem; animation:in .35s cubic-bezier(.2,.9,.3,1.2); }
+  .toast.out { animation:out .25s forwards; }
+  .toast .ic { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:var(--fill); flex:none; }
+  .toast.ok .ic { background:var(--ok-soft); color:var(--ok); }
+  .toast.err .ic { background:#fee2e2; color:var(--danger); }
+  @keyframes in { from { opacity:0; transform:translateY(-24px) scale(.96); } }
+  @keyframes out { to { opacity:0; transform:translateY(-16px) scale(.96); } }
+
+  @media (max-width:520px) {
+    dialog { width:100%; max-width:none; margin:auto 0 0; border-radius:28px 28px 0 0; animation:sheet .3s cubic-bezier(.2,.9,.3,1); }
+    @keyframes sheet { from { transform:translateY(100%); } }
+  }
 </style>
 </head>
 <body>
 <main>
   <header>
-    <h1>✈️ Dívidas da viagem</h1>
+    <h1>Dívidas da viagem ✈️</h1>
     <p>Passagens no cartão do Matheus · Hospedagem no cartão da Isa</p>
   </header>
 
-  <section class="summary">
+  <section class="card summary">
     <div class="stats">
       <div class="stat pend"><small>Falta pagar</small><strong id="sPend">–</strong></div>
+      <hr>
       <div class="stat paid"><small>Já pago</small><strong id="sPaid">–</strong></div>
     </div>
     <div class="bar"><i id="bar" style="width:0"></i></div>
-    <div class="bar-label" id="barLabel"></div>
+    <div class="bar-label" id="barLabel">Carregando…</div>
   </section>
 
   <nav class="tabs">
-    <button data-tab="pend" class="on">⏳ Falta pagar</button>
-    <button data-tab="paid">✅ Já pagaram</button>
+    <button data-tab="pend" class="on">Falta pagar<b id="nPend"></b></button>
+    <button data-tab="paid">Já pagaram<b id="nPaid"></b></button>
   </nav>
 
   <div id="list"></div>
@@ -97,6 +125,7 @@
   <form method="dialog" id="form">
     <h2 id="dTitle"></h2>
     <div class="detail" id="dDetail"></div>
+    <div id="dPix"></div>
     <label class="field" id="dDateWrap">Data do pagamento<input type="date" id="dDate" required></label>
     <label class="check"><input type="checkbox" id="dCheck" required><span id="dCheckText"></span></label>
     <div class="modal-actions">
@@ -113,7 +142,13 @@ const brl = (n) => n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' 
 const fmt = (d) => d.split('-').reverse().join('/');
 const today = () => new Date().toLocaleDateString('sv'); // AAAA-MM-DD no fuso local
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-const COLORS = { Matheus:'#4f46e5', Laryssa:'#db2777', Gabriela:'#0891b2', Victor:'#ea580c', Isabelly:'#7c3aed' };
+const COLORS = { Matheus:'#4338ca', Laryssa:'#db2777', Gabriela:'#0891b2', Victor:'#ea580c', Isabelly:'#7c3aed' };
+const PIX = { Matheus: { key:'11977956356', info:'Matheus Pimentel · Nubank' } }; // chave de quem recebe
+const ICON = {
+  check:'<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
+  x:'<svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  copy:'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+};
 const avatar = (n) => `<div class="avatar" style="background:${COLORS[n] || '#64748b'}">${esc(n[0])}</div>`;
 
 let items = [], tab = 'pend', current = null;
@@ -125,11 +160,21 @@ async function api(body) {
   return data.items;
 }
 
-function toast(msg, type = '') {
+function toast(msg, type = 'ok') {
   const t = document.createElement('div');
-  t.className = 'toast ' + type; t.textContent = msg;
+  t.className = 'toast ' + type;
+  t.innerHTML = `<div class="ic">${type === 'err' ? ICON.x : ICON.check}</div><div>${esc(msg)}</div>`;
   $('toasts').append(t);
-  setTimeout(() => t.remove(), 3500);
+  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 250); }, 3200);
+}
+
+async function copyPix(to) {
+  try {
+    await navigator.clipboard.writeText(PIX[to].key);
+    toast('Chave Pix copiada!');
+  } catch {
+    toast(`Não consegui copiar. Chave: ${PIX[to].key}`, 'err');
+  }
 }
 
 function render() {
@@ -137,43 +182,49 @@ function render() {
   const pend = items.filter((i) => !i.paidAt), paid = items.filter((i) => i.paidAt);
   $('sPend').textContent = brl(sum(pend));
   $('sPaid').textContent = brl(sum(paid));
+  $('nPend').textContent = pend.length; $('nPaid').textContent = paid.length;
   const pct = items.length ? Math.round((paid.length / items.length) * 100) : 0;
   $('bar').style.width = pct + '%';
-  $('barLabel').textContent = `${paid.length} de ${items.length} parcelas pagas (${pct}%)`;
+  $('barLabel').textContent = `${paid.length} de ${items.length} parcelas pagas · ${pct}%`;
 
   const shown = tab === 'pend' ? pend : paid;
   if (!shown.length) {
     $('list').innerHTML = `<div class="empty">${tab === 'pend' ? 'Tudo pago! 🎉' : 'Ninguém pagou ainda.'}</div>`;
     return;
   }
-  const byCreditor = Object.groupBy(shown, (i) => i.to);
-  $('list').innerHTML = Object.entries(byCreditor).map(([to, list]) => `
-    <section class="group">
-      <div class="group-h"><b>Pagar para ${esc(to)}</b><span>${esc(list[0].motivo)} · ${brl(sum(list))}</span></div>
+  $('list').innerHTML = Object.entries(Object.groupBy(shown, (i) => i.to)).map(([to, list]) => `
+    <section class="card group">
+      <div class="group-h">
+        ${avatar(to)}
+        <div class="who"><b>Para ${esc(to)}</b><small>${esc(list[0].motivo)} · ${brl(sum(list))}</small></div>
+        ${PIX[to] && tab === 'pend' ? `<button class="btn soft sm" data-pix="${esc(to)}">${ICON.copy}Pix</button>` : ''}
+      </div>
       ${list.map((i) => `
         <div class="row">
           ${avatar(i.from)}
           <div class="who"><b>${esc(i.from)}</b><small>${i.paidAt ? `Pago em ${fmt(i.paidAt)}` : `Parcela ${esc(i.parcela)}`}</small></div>
-          ${i.paidAt ? `<span class="badge ok">${esc(i.parcela)}</span>` : `<span class="amount">${brl(i.amount)}</span>`}
-          <button class="btn ${i.paidAt ? 'ghost' : 'soft'}" data-id="${esc(i.id)}">${i.paidAt ? 'Desfazer' : 'Pagar'}</button>
+          ${i.paidAt ? `<span class="badge">${esc(i.parcela)}</span>` : `<span class="amount">${brl(i.amount)}</span>`}
+          <button class="btn sm ${i.paidAt ? 'ghost' : 'soft'}" data-id="${esc(i.id)}">${i.paidAt ? 'Desfazer' : 'Pagar'}</button>
         </div>`).join('')}
     </section>`).join('');
 }
 
 function openModal(item) {
   current = item;
-  const undo = !!item.paidAt;
+  const undo = !!item.paidAt, pix = PIX[item.to];
   $('dTitle').textContent = undo ? 'Desfazer pagamento?' : 'Confirmar pagamento';
   $('dDetail').innerHTML = `
     <div><span>De</span><b>${esc(item.from)}</b></div>
     <div><span>Para</span><b>${esc(item.to)}</b></div>
-    <div><span>Parcela</span><b>${esc(item.parcela)} · ${esc(item.motivo)}</b></div>
+    <div><span>Parcela</span><b>${esc(item.parcela)}</b></div>
     <div><span>Valor</span><b>${brl(item.amount)}</b></div>
     ${undo ? `<div><span>Pago em</span><b>${fmt(item.paidAt)}</b></div>` : ''}`;
+  $('dPix').innerHTML = pix && !undo
+    ? `<div class="pix"><div><small>Pix · ${esc(pix.info)}</small><b>${esc(pix.key)}</b></div><button type="button" class="btn sm" data-pix="${esc(item.to)}">${ICON.copy}Copiar</button></div>`
+    : '';
   $('dDateWrap').hidden = undo;
   $('dDate').required = !undo;
-  $('dDate').value = today();
-  $('dDate').max = today();
+  $('dDate').value = $('dDate').max = today();
   $('dCheck').checked = false;
   $('dCheckText').textContent = undo
     ? 'Entendo que essa parcela voltará para "Falta pagar".'
@@ -191,7 +242,7 @@ $('form').addEventListener('submit', async (e) => {
     items = await api({ id:item.id, date:undo ? null : $('dDate').value });
     $('dlg').close();
     render();
-    toast(undo ? `Pagamento de ${item.from} desfeito` : `✅ ${item.from} pagou ${brl(item.amount)} para ${item.to}!`, undo ? '' : 'ok');
+    toast(undo ? `Pagamento de ${item.from} desfeito` : `${item.from} pagou ${brl(item.amount)} para ${item.to}`);
   } catch (err) {
     toast('Erro: ' + err.message, 'err');
   } finally {
@@ -202,15 +253,16 @@ $('form').addEventListener('submit', async (e) => {
 $('dCancel').onclick = () => $('dlg').close();
 $('dlg').addEventListener('click', (e) => { if (e.target === $('dlg')) $('dlg').close(); }); // clique no fundo
 
-$('list').addEventListener('click', (e) => {
-  const id = e.target.dataset.id;
-  if (id) openModal(items.find((i) => i.id === id));
-});
-document.querySelector('.tabs').addEventListener('click', (e) => {
-  if (!e.target.dataset.tab) return;
-  tab = e.target.dataset.tab;
-  document.querySelectorAll('.tabs button').forEach((b) => b.classList.toggle('on', b === e.target));
-  render();
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  if (b.dataset.pix) copyPix(b.dataset.pix);
+  else if (b.dataset.id) openModal(items.find((i) => i.id === b.dataset.id));
+  else if (b.dataset.tab) {
+    tab = b.dataset.tab;
+    document.querySelectorAll('.tabs button').forEach((x) => x.classList.toggle('on', x === b));
+    render();
+  }
 });
 
 api().then((i) => { items = i; render(); }).catch((e) => toast('Erro: ' + e.message, 'err'));
