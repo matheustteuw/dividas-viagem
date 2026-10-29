@@ -3,269 +3,268 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f5f6fa">
-<title>Arraial do Cabo</title>
+<meta name="theme-color" content="#0b1f3a">
+<title>Arraial do Cabo · Nossa viagem</title>
 <style>
   :root {
-    --bg:#f5f6fa; --card:#fff; --text:#111827; --muted:#6b7280; --line:#eceef3; --fill:#f3f4f8;
-    --brand:#4338ca; --brand-soft:#eef0ff; --ok:#059669; --ok-soft:#e7f7f0; --warn:#b45309; --warn-soft:#fdf3e1; --danger:#dc2626;
-    --shadow:0 1px 2px rgba(17,24,39,.04), 0 8px 24px rgba(17,24,39,.06);
+    --bg:#f5f6fa; --card:#fff; --text:#0f172a; --muted:#64748b; --line:#e8ebf2; --fill:#f1f3f9;
+    --brand:#0e7490; --brand-soft:#e0f4f8; --ok:#059669; --sun:#f59e0b;
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 12px 32px rgba(15,23,42,.08);
     --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#0b0d17; --card:#151827; --text:#f1f2f9; --muted:#8e94ab; --line:#232740; --fill:#1d2136;
-      --brand:#8b93ff; --brand-soft:#232853; --ok:#34d399; --ok-soft:#10302a; --warn:#fbbf24; --warn-soft:#33270f; --shadow:none; }
+    :root { --bg:#08111f; --card:#13233d; --text:#eef3fb; --muted:#8fa0b8; --line:#243553; --fill:#15233a;
+      --brand:#22d3ee; --brand-soft:#0f2f3d; --ok:#34d399; --shadow:none; }
   }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html { -webkit-text-size-adjust:100%; }
-  body { margin:0; font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); }
-  main { max-width:520px; margin:0 auto; padding:calc(28px + var(--safe-t)) 16px calc(48px + var(--safe-b)); }
-  svg { width:18px; height:18px; flex:none; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body { margin:0; font:16px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 18px; }
+  section.block { padding:56px 0 8px; }
+  h2 { font-size:1.6rem; letter-spacing:-.03em; margin:0 0 6px; }
+  .lead { color:var(--muted); margin:0 0 22px; }
 
-  header { margin-bottom:20px; }
-  header h1 { font-size:1.6rem; line-height:1.15; margin:0; letter-spacing:-.03em; }
-  header p { margin:6px 0 0; color:var(--muted); font-size:.9rem; }
-
-  .card { background:var(--card); border-radius:20px; box-shadow:var(--shadow); border:1px solid var(--line); }
-
-  .summary { padding:20px; margin-bottom:20px; }
-  .stats { display:grid; grid-template-columns:1fr 1px 1fr; gap:16px; }
-  .stats hr { border:0; background:var(--line); margin:0; }
-  .stat small { display:block; color:var(--muted); font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; }
-  .stat strong { display:block; font-size:1.55rem; letter-spacing:-.03em; margin-top:2px; font-variant-numeric:tabular-nums; }
-  .stat.pend strong { color:var(--warn); } .stat.paid strong { color:var(--ok); }
-  .bar { height:8px; background:var(--fill); border-radius:99px; overflow:hidden; margin-top:18px; }
-  .bar i { display:block; height:100%; background:var(--ok); border-radius:99px; transition:width .5s cubic-bezier(.4,0,.2,1); }
-  .bar-label { color:var(--muted); font-size:.8rem; margin-top:8px; }
-
-  .tabs { display:grid; grid-template-columns:1fr 1fr; background:var(--fill); border-radius:14px; padding:4px; margin-bottom:16px; }
-  .tabs button { border:0; background:transparent; color:var(--muted); font:inherit; font-weight:600; padding:11px 8px; border-radius:11px; cursor:pointer; min-height:44px; }
-  .tabs button.on { background:var(--card); color:var(--text); box-shadow:0 1px 3px rgba(0,0,0,.08); }
-  .tabs b { font-weight:600; opacity:.55; margin-left:4px; }
-
-  .group { margin-bottom:16px; overflow:hidden; }
-  .group-h { padding:16px; display:flex; align-items:center; gap:12px; }
-  .group-h .who b { font-size:1rem; }
-  .group-h .who small { display:block; color:var(--muted); font-size:.82rem; }
-  .row { display:flex; align-items:center; gap:12px; padding:14px 16px; border-top:1px solid var(--line); }
-  .avatar { width:40px; height:40px; border-radius:50%; display:grid; place-items:center; color:#fff; font-weight:700; flex:none; }
-  .group-h .avatar { width:44px; height:44px; }
-  .who { flex:1; min-width:0; }
-  .row .who b { display:block; font-weight:600; }
-  .row .who small { color:var(--muted); font-size:.82rem; }
-  .amount { font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
-
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; border:0; font:inherit; font-weight:600; padding:0 16px; min-height:40px; border-radius:12px; cursor:pointer; background:var(--brand); color:#fff; white-space:nowrap; }
+  /* HERO */
+  .hero { position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:center; color:#fff; overflow:hidden;
+    background:linear-gradient(180deg,#0b1f3a 0%,#134e6f 38%,#e76f51 78%,#f4a261 100%); background-size:cover; background-position:center; }
+  .hero.photo::before { content:""; position:absolute; inset:0; background:var(--cover) center/cover; }
+  .hero.photo::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(6,18,36,.55),rgba(6,18,36,.25) 50%,rgba(6,18,36,.75)); }
+  .hero .wrap { position:relative; z-index:2; padding-top:calc(40px + var(--safe-t)); padding-bottom:140px; }
+  .sun { position:absolute; z-index:1; width:220px; height:220px; border-radius:50%; right:-40px; bottom:34%; opacity:.85; background:radial-gradient(circle,#fff6d6 0%,#ffd166 40%,rgba(255,170,60,0) 70%); filter:blur(2px); animation:float 8s ease-in-out infinite; }
+  .hero.photo .sun { display:none; }
+  .stars { position:absolute; inset:0 0 50% 0; z-index:1; background-image:radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 45%,#fff,transparent),radial-gradient(1px 1px at 40% 12%,#fff,transparent),radial-gradient(1px 1px at 55% 40%,#fff,transparent),radial-gradient(1.5px 1.5px at 10% 8%,#fff,transparent); opacity:.7; animation:twinkle 4s ease-in-out infinite; }
+  .hero.photo .stars { display:none; }
+  .eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.14); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.25); padding:7px 14px; border-radius:99px; font-size:.85rem; font-weight:600; }
+  .hero h1 { font-size:clamp(2.8rem,11vw,5.5rem); line-height:.98; letter-spacing:-.045em; margin:20px 0 14px; max-width:10ch; text-shadow:0 4px 30px rgba(0,0,0,.25); }
+  .hero p.sub { font-size:1.1rem; max-width:34ch; opacity:.92; margin:0 0 28px; }
+  .cta { display:flex; gap:12px; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:8px; font:inherit; font-weight:700; border:0; cursor:pointer; min-height:54px; padding:0 26px; border-radius:16px; transition:transform .15s, box-shadow .15s; }
   .btn:active { transform:scale(.97); }
-  .btn.soft { background:var(--brand-soft); color:var(--brand); }
-  .btn.ghost { background:var(--fill); color:var(--muted); }
-  .btn.ok { background:var(--ok); color:#fff; }
-  .btn.sm { min-height:36px; padding:0 12px; font-size:.85rem; }
-  .btn:disabled { opacity:.5; }
-  .badge { font-size:.75rem; font-weight:600; padding:3px 9px; border-radius:99px; background:var(--ok-soft); color:var(--ok); }
-  .empty { text-align:center; color:var(--muted); padding:48px 0; }
+  .btn.primary { background:#fff; color:#0b1f3a; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+  .btn.primary:hover { transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.3); }
+  .btn.glass { background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.3); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+  .chips { display:flex; gap:10px; flex-wrap:wrap; margin-top:34px; }
+  .chip { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-radius:16px; padding:10px 14px; min-width:104px; }
+  .chip small { display:block; opacity:.75; font-size:.7rem; text-transform:uppercase; letter-spacing:.07em; font-weight:600; }
+  .chip b { font-size:1.15rem; letter-spacing:-.02em; }
+  .waves { position:absolute; left:0; right:0; bottom:-1px; height:120px; z-index:3; overflow:hidden; }
+  .waves svg { position:absolute; bottom:0; left:0; width:200%; height:100%; }
+  .waves .w1 { animation:wave 14s linear infinite; opacity:.5; } .waves .w2 { animation:wave 9s linear infinite reverse; opacity:.8; } .waves .w3 { animation:wave 20s linear infinite; }
+  .waves path { fill:var(--bg); }
 
-  dialog { border:0; padding:0; width:min(92vw,420px); border-radius:24px; background:var(--card); color:var(--text); box-shadow:0 24px 70px rgba(0,0,0,.35); }
-  dialog::backdrop { background:rgba(10,12,28,.5); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
-  dialog form { padding:22px 20px calc(20px + var(--safe-b)); }
-  dialog h2 { margin:0; font-size:1.2rem; letter-spacing:-.02em; }
-  .detail { background:var(--fill); border-radius:16px; padding:6px 14px; margin:16px 0; }
-  .detail div { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:9px 0; }
-  .detail div + div { border-top:1px solid var(--line); }
-  .detail span { color:var(--muted); font-size:.88rem; } .detail b { text-align:right; font-weight:600; }
-  .pix { display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--brand-soft); color:var(--brand); border-radius:16px; padding:12px 14px; margin-bottom:16px; }
-  .pix small { display:block; opacity:.8; font-size:.75rem; font-weight:600; } .pix b { font-size:.95rem; word-break:break-all; }
-  .field { display:block; font-size:.85rem; color:var(--muted); margin-bottom:14px; }
-  .field input { display:block; width:100%; margin-top:6px; font:inherit; font-size:16px; padding:12px; min-height:46px; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--text); }
-  .check { display:flex; gap:12px; align-items:flex-start; font-size:.92rem; margin-bottom:20px; cursor:pointer; }
-  .check input { margin:2px 0 0; width:22px; height:22px; flex:none; accent-color:var(--ok); }
-  .modal-actions { display:grid; grid-template-columns:1fr 1.6fr; gap:10px; } .modal-actions .btn { min-height:50px; }
+  /* PAGAMENTOS */
+  .pay { display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:28px; padding:24px; box-shadow:var(--shadow); margin-top:-40px; position:relative; z-index:5; }
+  .ring { width:112px; height:112px; border-radius:50%; background:conic-gradient(var(--ok) calc(var(--p,0)*1%), var(--fill) 0); display:grid; place-items:center; transition:background .6s; }
+  .ring div { width:86px; height:86px; border-radius:50%; background:var(--card); display:grid; place-items:center; font-size:1.5rem; font-weight:800; letter-spacing:-.03em; }
+  .pay h3 { margin:0; font-size:1.2rem; letter-spacing:-.02em; } .pay p { margin:4px 0 14px; color:var(--muted); font-size:.92rem; }
+  .pay .btn { min-height:46px; background:var(--brand); color:#fff; font-size:.95rem; padding:0 20px; border-radius:14px; }
+  @media (max-width:520px) { .pay { grid-template-columns:1fr; text-align:center; justify-items:center; } }
 
-  #toasts { position:fixed; top:calc(12px + var(--safe-t)); left:0; right:0; display:grid; gap:8px; justify-items:center; pointer-events:none; padding:0 16px; z-index:99; }
-  .toast { display:flex; align-items:center; gap:12px; width:min(100%,420px); background:var(--card); color:var(--text); border:1px solid var(--line); padding:12px 16px 12px 12px; border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.18); font-weight:500; font-size:.92rem; animation:in .35s cubic-bezier(.2,.9,.3,1.2); }
-  .toast.out { animation:out .25s forwards; }
-  .toast .ic { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:var(--fill); flex:none; }
-  .toast.ok .ic { background:var(--ok-soft); color:var(--ok); }
-  .toast.err .ic { background:#fee2e2; color:var(--danger); }
-  @keyframes in { from { opacity:0; transform:translateY(-24px) scale(.96); } }
-  @keyframes out { to { opacity:0; transform:translateY(-16px) scale(.96); } }
+  /* TURMA */
+  .squad { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+  .person { background:var(--card); border:1px solid var(--line); border-radius:22px; padding:18px 12px; text-align:center; box-shadow:var(--shadow); transition:transform .2s; }
+  .person:hover { transform:translateY(-4px); }
+  .avatar { width:64px; height:64px; border-radius:50%; margin:0 auto 10px; display:grid; place-items:center; color:#fff; font-size:1.5rem; font-weight:800; position:relative; box-shadow:0 8px 20px rgba(0,0,0,.18); }
+  .person b { display:block; } .person small { color:var(--muted); font-size:.78rem; }
+  .tag { display:inline-block; margin-top:8px; font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:99px; background:var(--fill); color:var(--muted); }
+  .tag.ok { background:rgba(5,150,105,.14); color:var(--ok); }
+  .tag.warn { background:rgba(245,158,11,.16); color:#b45309; }
+  @media (prefers-color-scheme: dark) { .tag.warn { color:#fbbf24; } }
 
-  @media (max-width:520px) {
-    dialog { width:100%; max-width:none; margin:auto 0 0; border-radius:28px 28px 0 0; animation:sheet .3s cubic-bezier(.2,.9,.3,1); }
-    @keyframes sheet { from { transform:translateY(100%); } }
-  }
+  /* DESTAQUES */
+  .scroller { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 18px 22px; margin:0 -18px; scrollbar-width:none; }
+  .scroller::-webkit-scrollbar { display:none; }
+  .spot { flex:0 0 min(78%,280px); scroll-snap-align:start; height:340px; border-radius:26px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:flex-end; position:relative; overflow:hidden; box-shadow:var(--shadow); transition:transform .25s; }
+  .spot:hover { transform:translateY(-4px); }
+  .spot .emoji { position:absolute; top:16px; right:18px; font-size:4rem; filter:drop-shadow(0 6px 12px rgba(0,0,0,.25)); }
+  .spot h3 { margin:0 0 4px; font-size:1.35rem; letter-spacing:-.02em; } .spot p { margin:0; font-size:.88rem; opacity:.92; }
+  .spot::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.35)); }
+  .spot > * { position:relative; z-index:1; } .spot .emoji { z-index:1; }
+
+  /* GALERIA */
+  .gallery { columns:2; column-gap:10px; }
+  @media (min-width:700px) { .gallery { columns:3; } }
+  .gallery button { display:block; width:100%; border:0; padding:0; margin:0 0 10px; border-radius:18px; overflow:hidden; cursor:zoom-in; background:var(--fill); break-inside:avoid; box-shadow:var(--shadow); }
+  .gallery img { display:block; width:100%; transition:transform .4s; } .gallery button:hover img { transform:scale(1.04); }
+  .ph { border:2px dashed var(--line); border-radius:22px; padding:32px 20px; text-align:center; color:var(--muted); background:var(--card); }
+  .ph b { display:block; color:var(--text); font-size:1.05rem; margin:6px 0; }
+  .ph code { background:var(--fill); padding:2px 8px; border-radius:8px; font-size:.85rem; }
+  dialog#lb { border:0; padding:0; background:transparent; max-width:96vw; max-height:92vh; }
+  dialog#lb::backdrop { background:rgba(5,10,20,.88); backdrop-filter:blur(4px); }
+  dialog#lb img { max-width:96vw; max-height:90vh; border-radius:16px; display:block; }
+
+  /* CHECKLIST */
+  .checklist { background:var(--card); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow); overflow:hidden; }
+  .checklist .head { padding:16px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); font-weight:700; }
+  .checklist .head span { color:var(--muted); font-weight:600; font-size:.88rem; }
+  .checklist label { display:flex; gap:14px; align-items:center; padding:14px 20px; border-top:1px solid var(--line); cursor:pointer; min-height:54px; }
+  .checklist label:first-of-type { border-top:0; }
+  .checklist input { width:24px; height:24px; accent-color:var(--ok); flex:none; }
+  .checklist input:checked + span { text-decoration:line-through; color:var(--muted); }
+
+  footer { text-align:center; color:var(--muted); padding:56px 18px calc(48px + var(--safe-b)); font-size:.9rem; }
+  footer .big { font-size:1.4rem; display:block; margin-bottom:6px; }
+
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s, transform .7s; }
+  .reveal.in { opacity:1; transform:none; }
+  @keyframes wave { to { transform:translateX(-50%); } }
+  @keyframes float { 50% { transform:translateY(-14px); } }
+  @keyframes twinkle { 50% { opacity:.35; } }
+  @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } .reveal { opacity:1; transform:none; } html { scroll-behavior:auto; } }
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>Arraial do Cabo ✈️</h1>
-    <p>Passagens no cartão do 2t bigode · Hospedagem no cartão da Isa</p>
-  </header>
 
-  <section class="card summary">
-    <div class="stats">
-      <div class="stat pend"><small>Falta pagar</small><strong id="sPend">–</strong></div>
-      <hr>
-      <div class="stat paid"><small>Já pago</small><strong id="sPaid">–</strong></div>
+<header class="hero" id="hero">
+  <div class="stars"></div><div class="sun"></div>
+  <div class="wrap">
+    <span class="eyebrow">🏝️ O Caribe brasileiro</span>
+    <h1>Arraial do Cabo</h1>
+    <p class="sub">6 amigos, 1 viagem e muita praia de água azul. Bora organizar tudo por aqui.</p>
+    <div class="cta">
+      <a class="btn primary" href="pagamentos.html">💸 Iniciar pagamentos</a>
+      <a class="btn glass" href="#destaques">Ver destaques ↓</a>
     </div>
-    <div class="bar"><i id="bar" style="width:0"></i></div>
-    <div class="bar-label" id="barLabel">Carregando…</div>
+    <div class="chips">
+      <div class="chip" id="chipWeather"><small>Agora em Arraial</small><b>…</b></div>
+      <div class="chip" id="chipCount" hidden><small>Faltam</small><b></b></div>
+      <div class="chip"><small>Turma</small><b>6 pessoas</b></div>
+    </div>
+  </div>
+  <div class="waves" aria-hidden="true">
+    <svg class="w1" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 60 Q180 10 360 60 T720 60 T1080 60 T1440 60 T1800 60 T2160 60 T2520 60 T2880 60 V120 H0Z"/></svg>
+    <svg class="w2" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 70 Q240 20 480 70 T960 70 T1440 70 T1920 70 T2400 70 T2880 70 V120 H0Z"/></svg>
+    <svg class="w3" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 85 Q360 45 720 85 T1440 85 T2160 85 T2880 85 V120 H0Z"/></svg>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="pay reveal" href="pagamentos.html" id="pay" style="display:grid">
+    <div class="ring" id="ring"><div id="pct">–</div></div>
+    <div>
+      <h3>Status dos pagamentos</h3>
+      <p id="payText">Carregando…</p>
+      <span class="btn">Ver quem falta pagar →</span>
+    </div>
+  </a>
+
+  <section class="block reveal">
+    <h2>A turma 🤙</h2>
+    <p class="lead">Quem vai fazer essa viagem acontecer.</p>
+    <div class="squad" id="squad"></div>
   </section>
 
-  <nav class="tabs">
-    <button data-tab="pend" class="on">Falta pagar<b id="nPend"></b></button>
-    <button data-tab="paid">Já pagaram<b id="nPaid"></b></button>
-  </nav>
+  <section class="block reveal" id="destaques">
+    <h2>Não pode perder 🌊</h2>
+    <p class="lead">Os lugares que fazem Arraial valer cada centavo.</p>
+    <div class="scroller">
+      <article class="spot" style="background:linear-gradient(160deg,#06b6d4,#0e7490)"><span class="emoji">🏖️</span><h3>Praia do Forno</h3><p>Água cristalina e calma, daquelas de tirar o fôlego. Chega de barco ou por trilha.</p></article>
+      <article class="spot" style="background:linear-gradient(160deg,#3b82f6,#1e3a8a)"><span class="emoji">⛵</span><h3>Passeio de barco</h3><p>Prainhas, Ilha do Farol e Gruta Azul num só rolê. Dá pra mergulhar com snorkel.</p></article>
+      <article class="spot" style="background:linear-gradient(160deg,#fb923c,#be185d)"><span class="emoji">🌅</span><h3>Pontal do Atalaia</h3><p>Mirante com a vista mais linda da cidade. Perfeito para o pôr do sol.</p></article>
+      <article class="spot" style="background:linear-gradient(160deg,#10b981,#065f46)"><span class="emoji">🐠</span><h3>Mergulho</h3><p>Uma das águas mais ricas em vida marinha do Brasil. Bora ver peixe de perto.</p></article>
+      <article class="spot" style="background:linear-gradient(160deg,#a855f7,#4c1d95)"><span class="emoji">🍤</span><h3>Centro e Praia dos Anjos</h3><p>Restaurantes, sorvete e a noite agitada para fechar o dia.</p></article>
+    </div>
+  </section>
 
-  <div id="list"></div>
+  <section class="block reveal">
+    <h2>Fotos 📸</h2>
+    <p class="lead">Toque numa foto para ampliar.</p>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section class="block reveal">
+    <h2>O que levar 🎒</h2>
+    <p class="lead">Marque o que já separou. Fica salvo no seu celular.</p>
+    <div class="checklist" id="check"></div>
+  </section>
 </main>
 
-<dialog id="dlg">
-  <form method="dialog" id="form">
-    <h2 id="dTitle"></h2>
-    <div class="detail" id="dDetail"></div>
-    <div id="dPix"></div>
-    <label class="field" id="dDateWrap">Data do pagamento<input type="date" id="dDate" required></label>
-    <label class="check"><input type="checkbox" id="dCheck" required><span id="dCheckText"></span></label>
-    <div class="modal-actions">
-      <button type="button" class="btn ghost" id="dCancel">Cancelar</button>
-      <button type="submit" class="btn ok" id="dOk">Confirmar</button>
-    </div>
-  </form>
-</dialog>
-<div id="toasts"></div>
+<footer>
+  <span class="big">🌴☀️🌊</span>
+  Feito com carinho para a viagem a Arraial do Cabo.
+</footer>
+
+<dialog id="lb"><img id="lbImg" alt=""></dialog>
 
 <script>
 const $ = (id) => document.getElementById(id);
-const brl = (n) => n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
-const fmt = (d) => d.split('-').reverse().join('/');
-const today = () => new Date().toLocaleDateString('sv'); // AAAA-MM-DD no fuso local
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-const COLORS = { '2t bigode':'#4338ca', Arthur:'#16a34a', Laryssa:'#db2777', Gabi:'#0891b2', Victor:'#ea580c', Isa:'#7c3aed' };
-const PIX = { '2t bigode': { key:'11977956356', info:'Matheus Pimentel · Nubank' } }; // chave de quem recebe
-const ICON = {
-  check:'<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
-  x:'<svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>',
-  copy:'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
-};
-const avatar = (n) => `<div class="avatar" style="background:${COLORS[n] || '#64748b'}">${esc(n[0])}</div>`;
+const TRIP_DATE = ''; // ex.: '2026-12-20' para ligar a contagem regressiva
+const PEOPLE = [
+  { n:'2t bigode', c:'#4338ca', role:'Passagens 🎫' },
+  { n:'Arthur', c:'#16a34a', role:'Aventureiro' },
+  { n:'Laryssa', c:'#db2777', role:'Fotógrafa 📷' },
+  { n:'Gabi', c:'#0891b2', role:'Boa vibe ✨' },
+  { n:'Victor', c:'#ea580c', role:'Sempre pronto' },
+  { n:'Isa', c:'#7c3aed', role:'Hospedagem 🏠' },
+];
+const TODO = ['Protetor solar', 'Roupa de banho', 'Chapéu ou boné', 'Óculos de sol', 'Toalha de praia', 'Carregador e power bank', 'Chinelo', 'Documento com foto', 'Repelente', 'Dinheiro e Pix em dia 😉'];
 
-let items = [], tab = 'pend', current = null;
+// reveal ao rolar
+const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { threshold:.12 });
+document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-async function api(body) {
-  const r = await fetch('/api/payments', body && { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify(body) });
-  const data = await r.json();
-  if (!r.ok) throw new Error(data.error);
-  return data.items;
+// clima (Open-Meteo, sem chave)
+const WX = (c) => c === 0 ? '☀️' : c < 3 ? '🌤️' : c === 3 ? '☁️' : c < 50 ? '🌫️' : c < 70 || (c >= 80 && c < 90) ? '🌧️' : '⛈️';
+fetch('https://api.open-meteo.com/v1/forecast?latitude=-22.9661&longitude=-42.0278&current=temperature_2m,weather_code&timezone=auto')
+  .then((r) => r.json())
+  .then(({ current }) => { $('chipWeather').querySelector('b').textContent = `${WX(current.weather_code)} ${Math.round(current.temperature_2m)}°C`; })
+  .catch(() => { $('chipWeather').hidden = true; });
+
+// contagem regressiva
+if (TRIP_DATE) {
+  const days = Math.ceil((new Date(TRIP_DATE + 'T00:00:00') - new Date()) / 864e5);
+  if (days > 0) { $('chipCount').hidden = false; $('chipCount').querySelector('b').textContent = `${days} dia${days > 1 ? 's' : ''}`; }
 }
 
-function toast(msg, type = 'ok') {
-  const t = document.createElement('div');
-  t.className = 'toast ' + type;
-  t.innerHTML = `<div class="ic">${type === 'err' ? ICON.x : ICON.check}</div><div>${esc(msg)}</div>`;
-  $('toasts').append(t);
-  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 250); }, 3200);
+// turma + status dos pagamentos
+function renderSquad(items) {
+  $('squad').innerHTML = PEOPLE.map((p) => {
+    const mine = items?.filter((i) => i.from === p.n) || [];
+    const open = mine.filter((i) => !i.paidAt).length;
+    const tag = !items ? '' : open ? `<span class="tag warn">${open} pendente${open > 1 ? 's' : ''}</span>` : '<span class="tag ok">✓ Em dia</span>';
+    return `<div class="person"><div class="avatar" style="background:${p.c}">${esc(p.n[0])}</div><b>${esc(p.n)}</b><small>${esc(p.role)}</small><br>${tag}</div>`;
+  }).join('');
 }
+renderSquad();
+fetch('/api/payments').then((r) => r.json()).then(({ items }) => {
+  const paid = items.filter((i) => i.paidAt).length, pct = Math.round((paid / items.length) * 100);
+  $('ring').style.setProperty('--p', pct);
+  $('pct').textContent = pct + '%';
+  $('payText').textContent = paid === items.length ? 'Tudo pago! Agora é só curtir 🎉' : `${paid} de ${items.length} parcelas pagas. Confirme a sua por lá.`;
+  renderSquad(items);
+}).catch(() => { $('payText').textContent = 'Toque para ver os pagamentos.'; $('pct').textContent = '💸'; });
 
-async function copyPix(to) {
-  try {
-    await navigator.clipboard.writeText(PIX[to].key);
-    toast('Chave Pix copiada!');
-  } catch {
-    toast(`Não consegui copiar. Chave: ${PIX[to].key}`, 'err');
-  }
-}
-
-function render() {
-  const sum = (l) => l.reduce((s, i) => s + i.amount, 0);
-  const pend = items.filter((i) => !i.paidAt), paid = items.filter((i) => i.paidAt);
-  $('sPend').textContent = brl(sum(pend));
-  $('sPaid').textContent = brl(sum(paid));
-  $('nPend').textContent = pend.length; $('nPaid').textContent = paid.length;
-  const pct = items.length ? Math.round((paid.length / items.length) * 100) : 0;
-  $('bar').style.width = pct + '%';
-  $('barLabel').textContent = `${paid.length} de ${items.length} parcelas pagas · ${pct}%`;
-
-  const shown = tab === 'pend' ? pend : paid;
-  if (!shown.length) {
-    $('list').innerHTML = `<div class="empty">${tab === 'pend' ? 'Tudo pago! 🎉' : 'Ninguém pagou ainda.'}</div>`;
-    return;
-  }
-  $('list').innerHTML = Object.entries(Object.groupBy(shown, (i) => i.to)).map(([to, list]) => `
-    <section class="card group">
-      <div class="group-h">
-        ${avatar(to)}
-        <div class="who"><b>Para ${esc(to)}</b><small>${esc(list[0].motivo)} · ${brl(sum(list))}</small></div>
-        ${PIX[to] && tab === 'pend' ? `<button class="btn soft sm" data-pix="${esc(to)}">${ICON.copy}Pix</button>` : ''}
-      </div>
-      ${list.map((i) => `
-        <div class="row">
-          ${avatar(i.from)}
-          <div class="who"><b>${esc(i.from)}</b><small>${i.paidAt ? `Pago em ${fmt(i.paidAt)}` : `Parcela ${esc(i.parcela)}`}</small></div>
-          ${i.paidAt ? `<span class="badge">${esc(i.parcela)}</span>` : `<span class="amount">${brl(i.amount)}</span>`}
-          <button class="btn sm ${i.paidAt ? 'ghost' : 'soft'}" data-id="${esc(i.id)}">${i.paidAt ? 'Desfazer' : 'Pagar'}</button>
-        </div>`).join('')}
-    </section>`).join('');
-}
-
-function openModal(item) {
-  current = item;
-  const undo = !!item.paidAt, pix = PIX[item.to];
-  $('dTitle').textContent = undo ? 'Desfazer pagamento?' : 'Confirmar pagamento';
-  $('dDetail').innerHTML = `
-    <div><span>De</span><b>${esc(item.from)}</b></div>
-    <div><span>Para</span><b>${esc(item.to)}</b></div>
-    <div><span>Parcela</span><b>${esc(item.parcela)}</b></div>
-    <div><span>Valor</span><b>${brl(item.amount)}</b></div>
-    ${undo ? `<div><span>Pago em</span><b>${fmt(item.paidAt)}</b></div>` : ''}`;
-  $('dPix').innerHTML = pix && !undo
-    ? `<div class="pix"><div><small>Pix · ${esc(pix.info)}</small><b>${esc(pix.key)}</b></div><button type="button" class="btn sm" data-pix="${esc(item.to)}">${ICON.copy}Copiar</button></div>`
-    : '';
-  $('dDateWrap').hidden = undo;
-  $('dDate').required = !undo;
-  $('dDate').value = $('dDate').max = today();
-  $('dCheck').checked = false;
-  $('dCheckText').textContent = undo
-    ? 'Entendo que essa parcela voltará para "Falta pagar".'
-    : `Confirmo que ${item.from} já pagou ${brl(item.amount)} para ${item.to}.`;
-  $('dOk').className = 'btn ' + (undo ? 'ghost' : 'ok');
-  $('dOk').textContent = undo ? 'Desfazer' : 'Confirmar pagamento';
-  $('dlg').showModal();
-}
-
-$('form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const item = current, undo = !!item.paidAt;
-  $('dOk').disabled = true;
-  try {
-    items = await api({ id:item.id, date:undo ? null : $('dDate').value });
-    $('dlg').close();
-    render();
-    toast(undo ? `Pagamento de ${item.from} desfeito` : `${item.from} pagou ${brl(item.amount)} para ${item.to}`);
-  } catch (err) {
-    toast('Erro: ' + err.message, 'err');
-  } finally {
-    $('dOk').disabled = false;
-  }
+// fotos: basta colocar capa.jpg e 1.jpg ... 12.jpg na pasta fotos/
+const probe = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(src); i.onerror = () => ok(null); i.src = src; });
+probe('fotos/capa.jpg').then((s) => { if (s) { $('hero').classList.add('photo'); $('hero').style.setProperty('--cover', `url(${s})`); } });
+Promise.all(Array.from({ length:12 }, (_, i) => probe(`fotos/${i + 1}.jpg`))).then((r) => {
+  const pics = r.filter(Boolean);
+  $('gallery').outerHTML = pics.length
+    ? `<div class="gallery" id="gallery">${pics.map((s) => `<button data-src="${s}"><img src="${s}" alt="Foto da viagem" loading="lazy"></button>`).join('')}</div>`
+    : '<div class="ph">📷<b>Suas fotos aparecem aqui</b>Coloque <code>1.jpg</code>, <code>2.jpg</code>… na pasta <code>fotos/</code>.<br>Uma <code>capa.jpg</code> vira o fundo do topo.</div>';
 });
-
-$('dCancel').onclick = () => $('dlg').close();
-$('dlg').addEventListener('click', (e) => { if (e.target === $('dlg')) $('dlg').close(); }); // clique no fundo
-
 document.addEventListener('click', (e) => {
-  const b = e.target.closest('button');
-  if (!b) return;
-  if (b.dataset.pix) copyPix(b.dataset.pix);
-  else if (b.dataset.id) openModal(items.find((i) => i.id === b.dataset.id));
-  else if (b.dataset.tab) {
-    tab = b.dataset.tab;
-    document.querySelectorAll('.tabs button').forEach((x) => x.classList.toggle('on', x === b));
-    render();
-  }
+  const b = e.target.closest('[data-src]');
+  if (b) { $('lbImg').src = b.dataset.src; $('lb').showModal(); }
+  else if (e.target === $('lb') || e.target === $('lbImg')) $('lb').close();
 });
 
-api().then((i) => { items = i; render(); }).catch((e) => toast('Erro: ' + e.message, 'err'));
+// checklist salva no navegador
+let done = [];
+try { done = JSON.parse(localStorage.getItem('todo') || '[]'); } catch {}
+function renderCheck() {
+  $('check').innerHTML = `<div class="head">Mala <span>${done.length}/${TODO.length}</span></div>` +
+    TODO.map((t, i) => `<label><input type="checkbox" data-i="${i}" ${done.includes(i) ? 'checked' : ''}><span>${esc(t)}</span></label>`).join('');
+}
+$('check').addEventListener('change', (e) => {
+  const i = +e.target.dataset.i;
+  done = e.target.checked ? [...done, i] : done.filter((x) => x !== i);
+  try { localStorage.setItem('todo', JSON.stringify(done)); } catch {}
+  renderCheck();
+});
+renderCheck();
 </script>
 </body>
 </html>
