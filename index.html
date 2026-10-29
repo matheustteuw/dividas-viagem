@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5f6fa">
-<title>Dívidas da Viagem</title>
+<title>Arraial do Cabo</title>
 <style>
   :root {
     --bg:#f5f6fa; --card:#fff; --text:#111827; --muted:#6b7280; --line:#eceef3; --fill:#f3f4f8;
@@ -99,8 +99,8 @@
 <body>
 <main>
   <header>
-    <h1>Dívidas da viagem ✈️</h1>
-    <p>Passagens no cartão do Matheus · Hospedagem no cartão da Isa</p>
+    <h1>Arraial do Cabo ✈️</h1>
+    <p>Passagens no cartão do 2t bigode · Hospedagem no cartão da Isa</p>
   </header>
 
   <section class="card summary">
@@ -142,8 +142,8 @@ const brl = (n) => n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' 
 const fmt = (d) => d.split('-').reverse().join('/');
 const today = () => new Date().toLocaleDateString('sv'); // AAAA-MM-DD no fuso local
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-const COLORS = { Matheus:'#4338ca', Laryssa:'#db2777', Gabriela:'#0891b2', Victor:'#ea580c', Isabelly:'#7c3aed' };
-const PIX = { Matheus: { key:'11977956356', info:'Matheus Pimentel · Nubank' } }; // chave de quem recebe
+const COLORS = { '2t bigode':'#4338ca', Laryssa:'#db2777', Gabriela:'#0891b2', Victor:'#ea580c', Isabelly:'#7c3aed' };
+const PIX = { '2t bigode': { key:'11977956356', info:'Matheus Pimentel · Nubank' } }; // chave de quem recebe
 const ICON = {
   check:'<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
   x:'<svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>',

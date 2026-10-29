@@ -1,7 +1,7 @@
 // Lista de parcelas (fonte única). Para mudar valores/pessoas, edite aqui.
-const PESSOAS = ['Matheus', 'Laryssa', 'Gabriela', 'Victor', 'Isabelly'];
+const PESSOAS = ['2t bigode', 'Laryssa', 'Gabriela', 'Victor', 'Isabelly'];
 const PLANOS = [
-  { to: 'Matheus', amount: 112, motivo: 'Passagens (cartão do Matheus)', parcelas: ['Novembro', 'Dezembro'] },
+  { to: '2t bigode', amount: 112, motivo: 'Passagens (cartão do 2t bigode)', parcelas: ['05/11', '05/12'] },
   { to: 'Isabelly', amount: 145, motivo: 'Hospedagem (cartão da Isa)', parcelas: ['08/11', '08/12'] },
 ];
 
