@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f5f6fa">
+<meta name="theme-color" content="#f6f0e6">
 <title>Pagamentos · Arraial do Cabo</title>
 <style>
   :root {
-    --bg:#f5f6fa; --card:#fff; --text:#111827; --muted:#6b7280; --line:#eceef3; --fill:#f3f4f8;
-    --brand:#4338ca; --brand-soft:#eef0ff; --ok:#059669; --ok-soft:#e7f7f0; --warn:#b45309; --warn-soft:#fdf3e1; --danger:#dc2626;
+    --bg:#f6f0e6; --card:#fffdf9; --text:#1b2a2f; --muted:#6c7a7d; --line:#e6dccb; --fill:#f0e8da;
+    --brand:#0f6b73; --brand-soft:#dcefee; --ok:#059669; --ok-soft:#e7f7f0; --warn:#b45309; --warn-soft:#fdf3e1; --danger:#dc2626;
     --shadow:0 1px 2px rgba(17,24,39,.04), 0 8px 24px rgba(17,24,39,.06);
     --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#0b0d17; --card:#151827; --text:#f1f2f9; --muted:#8e94ab; --line:#232740; --fill:#1d2136;
-      --brand:#8b93ff; --brand-soft:#232853; --ok:#34d399; --ok-soft:#10302a; --warn:#fbbf24; --warn-soft:#33270f; --shadow:none; }
+    :root { --bg:#0f1a1c; --card:#162326; --text:#f1ece2; --muted:#93a3a5; --line:#26373a; --fill:#1d2e31;
+      --brand:#4fc3cc; --brand-soft:#14343a; --ok:#34d399; --ok-soft:#10302a; --warn:#fbbf24; --warn-soft:#33270f; --shadow:none; }
   }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html { -webkit-text-size-adjust:100%; }
@@ -24,7 +24,7 @@
 
   header { margin-bottom:20px; }
   .back { display:inline-block; color:var(--brand); font-weight:600; text-decoration:none; margin-bottom:10px; padding:6px 0; }
-  header h1 { font-size:1.6rem; line-height:1.15; margin:0; letter-spacing:-.03em; }
+  header h1 { font:500 2rem/1.1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; margin:0; letter-spacing:-.02em; }
   header p { margin:6px 0 0; color:var(--muted); font-size:.9rem; }
 
   .card { background:var(--card); border-radius:20px; box-shadow:var(--shadow); border:1px solid var(--line); }
@@ -101,7 +101,7 @@
 <main>
   <header>
     <a class="back" href="/">← Início</a>
-    <h1>Pagamentos 💸</h1>
+    <h1>Pagamentos</h1>
     <p>Passagens no cartão do 2t bigode · Hospedagem no cartão da Isa</p>
   </header>
 
@@ -144,7 +144,7 @@ const brl = (n) => n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' 
 const fmt = (d) => d.split('-').reverse().join('/');
 const today = () => new Date().toLocaleDateString('sv'); // AAAA-MM-DD no fuso local
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-const COLORS = { '2t bigode':'#4338ca', Arthur:'#16a34a', Laryssa:'#db2777', Gabi:'#0891b2', Victor:'#ea580c', Isa:'#7c3aed' };
+const COLORS = { '2t bigode':'#0f6b73', Arthur:'#5b7c3a', Laryssa:'#c2566d', Gabi:'#b9833a', Victor:'#4f6fa8', Isa:'#7b5ea7' };
 const PIX = { '2t bigode': { key:'11977956356', info:'Matheus Pimentel · Nubank' } }; // chave de quem recebe
 const ICON = {
   check:'<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
