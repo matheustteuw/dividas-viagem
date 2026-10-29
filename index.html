@@ -3,110 +3,119 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0e3b43">
+<meta name="theme-color" content="#0d1117">
 <title>Arraial do Cabo · Nossa viagem</title>
 <style>
   :root {
-    --bg:#f6f0e6; --card:#fffdf9; --ink:#1b2a2f; --muted:#6c7a7d; --line:#e6dccb;
-    --teal:#0f6b73; --teal-soft:#dcefee; --coral:#e2725b; --ok:#2f855a;
-    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --bg:#0d1117; --card:#161b22; --line:#30363d; --ink:#f0f6fc; --muted:#8b949e;
+    --btn:#238636; --btn-hover:#2ea043; --green:#3fb950; --green-soft:rgba(46,160,67,.15); --warn:#d29922;
+    --font:"Mona Sans VF",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif;
     --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
   }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#0f1a1c; --card:#162326; --ink:#f1ece2; --muted:#93a3a5; --line:#26373a; --teal:#4fc3cc; --teal-soft:#14343a; --coral:#f08a73; --ok:#6ee7a0; }
-  }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
-  body { margin:0; font:16px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; color-scheme:dark; }
+  body { margin:0; font:16px/1.6 var(--font); background:var(--bg); color:var(--ink); }
   a { color:inherit; text-decoration:none; }
   img { display:block; width:100%; height:100%; object-fit:cover; }
   .wrap { max-width:1000px; margin:0 auto; padding:0 20px; }
-  h1,h2,h3 { font-family:var(--serif); font-weight:500; letter-spacing:-.02em; margin:0; }
-  h2 { font-size:clamp(1.9rem,6vw,2.6rem); line-height:1.1; }
-  em { font-style:italic; color:var(--coral); }
-  .kicker { font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; }
-  section.block { padding:72px 0 0; }
+  h1,h2,h3 { font-weight:700; letter-spacing:-.025em; margin:0; }
+  h2 { font-size:clamp(1.8rem,6vw,2.5rem); line-height:1.15; }
+  .g { color:var(--green); }
+  .kicker { font-size:.78rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--green); margin-bottom:10px; }
+  section.block { padding:80px 0 0; }
+
+  /* botão principal */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; font:inherit; font-weight:600; min-height:48px; padding:0 22px; border-radius:6px; border:1px solid rgba(240,246,252,.15); cursor:pointer; background:var(--btn); color:#fff; box-shadow:0 1px 3px rgba(1,4,9,.6); transition:background .15s, transform .15s; }
+  .btn:hover { background:var(--btn-hover); }
+  .btn:active { transform:scale(.98); }
+  .btn.ghost { background:rgba(13,17,23,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+  .btn.ghost:hover { background:rgba(48,54,61,.8); }
+  .btn.cta { min-height:62px; padding:0 34px; font-size:1.15rem; font-weight:700; border-radius:10px; background:linear-gradient(180deg,#2ea043,#238636); border-color:rgba(255,255,255,.3); animation:glow 2.4s ease-in-out infinite; }
+  .btn.cta svg { width:22px; height:22px; transition:transform .2s; } .btn.cta:hover svg { transform:translateX(5px); }
+  @keyframes glow { 0%,100% { box-shadow:0 0 0 0 rgba(63,185,80,.55), 0 10px 30px rgba(35,134,54,.45); } 50% { box-shadow:0 0 0 12px rgba(63,185,80,0), 0 10px 30px rgba(35,134,54,.45); } }
 
   /* topo */
-  .hero { position:relative; min-height:94svh; display:flex; align-items:flex-end; color:#fff; overflow:hidden; background:#0e3b43; }
+  .hero { position:relative; min-height:94svh; display:flex; align-items:flex-end; overflow:hidden; }
   .hero img { position:absolute; inset:0; object-position:center 78%; }
-  .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,30,36,.35) 0%,rgba(8,30,36,0) 35%,rgba(8,30,36,.78) 100%); }
-  .hero .wrap { position:relative; z-index:1; padding-bottom:calc(52px + var(--safe-b)); padding-top:calc(60px + var(--safe-t)); width:100%; }
-  .hero .tag { font-size:.9rem; letter-spacing:.04em; opacity:.92; margin:0 0 12px; }
-  .hero h1 { font-size:clamp(3.2rem,13vw,7rem); line-height:.95; text-shadow:0 2px 30px rgba(0,0,0,.35); }
-  .hero h1 i { font-style:italic; font-weight:400; }
-  .hero p.sub { max-width:30ch; font-size:1.15rem; margin:18px 0 28px; opacity:.95; }
-  .btns { display:flex; gap:12px; flex-wrap:wrap; }
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font:inherit; font-weight:600; min-height:52px; padding:0 26px; border-radius:99px; border:0; cursor:pointer; transition:transform .15s; }
-  .btn:active { transform:scale(.97); }
-  .btn.main { background:var(--coral); color:#fff; box-shadow:0 8px 24px rgba(226,114,91,.4); }
-  .btn.line { border:1.5px solid rgba(255,255,255,.7); color:#fff; }
+  .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(13,17,23,.5) 0%,rgba(13,17,23,.15) 30%,rgba(13,17,23,.85) 78%,var(--bg) 100%); }
+  .hero .wrap { position:relative; z-index:1; width:100%; padding-top:calc(60px + var(--safe-t)); padding-bottom:calc(56px + var(--safe-b)); }
+  .badge { display:inline-flex; align-items:center; gap:8px; padding:5px 12px; border-radius:99px; background:var(--green-soft); border:1px solid rgba(63,185,80,.4); color:var(--green); font-size:.85rem; font-weight:600; backdrop-filter:blur(6px); }
+  .badge::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--green); }
+  .hero h1 { font-size:clamp(3rem,12vw,6.2rem); line-height:1; margin:18px 0 14px; text-shadow:0 2px 30px rgba(0,0,0,.4); }
+  .hero p.sub { max-width:32ch; font-size:1.15rem; margin:0 0 28px; color:#e6edf3; }
+  .btns { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .btns .cta { width:100%; } @media (min-width:560px) { .btns .cta { width:auto; } }
 
-  /* faixa de infos */
-  .strip { display:flex; flex-wrap:wrap; gap:6px 28px; padding:22px 0; border-bottom:1px solid var(--line); color:var(--muted); font-size:.95rem; }
+  /* faixa */
+  .strip { display:flex; flex-wrap:wrap; gap:6px 28px; padding:18px 0; border-bottom:1px solid var(--line); color:var(--muted); font-size:.95rem; }
   .strip b { color:var(--ink); font-weight:600; }
 
   /* pagamentos */
-  .pay { display:block; margin-top:36px; background:var(--card); border:1px solid var(--line); border-radius:22px; padding:24px; transition:transform .2s, box-shadow .2s; }
-  .pay:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(27,42,47,.08); }
-  .pay-top { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
-  .pay .big { font-family:var(--serif); font-size:2.4rem; line-height:1; }
-  .pay .big small { font-size:1rem; color:var(--muted); font-family:inherit; }
-  .pay .go { color:var(--teal); font-weight:600; white-space:nowrap; }
-  .bar { height:6px; background:var(--line); border-radius:99px; overflow:hidden; margin:18px 0 10px; }
-  .bar i { display:block; height:100%; width:0; background:var(--ok); border-radius:99px; transition:width .8s cubic-bezier(.4,0,.2,1); }
+  .pay { display:block; margin-top:36px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:24px; transition:border-color .2s; }
+  .pay:hover { border-color:var(--green); }
+  .pay-top { display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap; }
+  .pay .big { font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:-.03em; }
+  .pay .big small { font-size:1rem; color:var(--muted); font-weight:500; letter-spacing:0; }
+  .bar { height:8px; background:#21262d; border-radius:99px; overflow:hidden; margin:18px 0 10px; }
+  .bar i { display:block; height:100%; width:0; background:var(--green); border-radius:99px; transition:width .8s cubic-bezier(.4,0,.2,1); }
   .pay p { margin:0; color:var(--muted); font-size:.92rem; }
 
   /* lugares */
   .intro { max-width:52ch; color:var(--muted); margin:12px 0 32px; }
   .places { display:grid; gap:28px 22px; }
   @media (min-width:700px) { .places { grid-template-columns:1fr 1fr; } .places .wide { grid-column:span 2; } .places .wide .ph { aspect-ratio:16/8; } }
-  .place .ph { aspect-ratio:4/3; border-radius:20px; overflow:hidden; background:var(--line); }
+  .place .ph { aspect-ratio:4/3; border-radius:12px; overflow:hidden; background:var(--card); border:1px solid var(--line); }
   .place img { transition:transform .8s; } .place:hover img { transform:scale(1.04); }
-  .place h3 { font-size:1.5rem; margin:14px 0 4px; }
+  .place h3 { font-size:1.3rem; margin:14px 0 4px; }
   .place p { margin:0; color:var(--muted); max-width:46ch; }
 
-  /* faixa do pôr do sol */
-  .sunset { position:relative; margin-top:72px; min-height:340px; display:grid; place-items:center; text-align:center; color:#fff; overflow:hidden; }
+  .sunset { position:relative; margin-top:80px; min-height:340px; display:grid; place-items:center; text-align:center; overflow:hidden; }
   .sunset img { position:absolute; inset:0; }
-  .sunset::after { content:""; position:absolute; inset:0; background:rgba(20,28,30,.45); }
-  .sunset blockquote { position:relative; z-index:1; margin:0; padding:40px 24px; font-family:var(--serif); font-size:clamp(1.7rem,6vw,2.8rem); line-height:1.2; max-width:20ch; }
+  .sunset::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,var(--bg),rgba(13,17,23,.5) 30%,rgba(13,17,23,.5) 70%,var(--bg)); }
+  .sunset blockquote { position:relative; z-index:1; margin:0; padding:40px 24px; font-size:clamp(1.7rem,6vw,2.7rem); font-weight:700; line-height:1.2; letter-spacing:-.025em; max-width:18ch; }
 
   /* turma */
-  .squad { margin-top:28px; border-top:1px solid var(--line); }
-  .person { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); }
-  .avatar { width:44px; height:44px; border-radius:50%; display:grid; place-items:center; color:#fff; font-family:var(--serif); font-size:1.2rem; flex:none; }
+  .squad { margin-top:28px; border:1px solid var(--line); border-radius:12px; background:var(--card); overflow:hidden; }
+  .person { display:flex; align-items:center; gap:14px; padding:14px 18px; border-top:1px solid var(--line); }
+  .person:first-child { border-top:0; }
+  .avatar { width:40px; height:40px; border-radius:50%; display:grid; place-items:center; color:#fff; font-weight:700; flex:none; }
   .person .who { flex:1; } .person b { display:block; font-weight:600; line-height:1.2; } .person small { color:var(--muted); }
-  .st { font-size:.85rem; font-weight:600; color:var(--coral); } .st.ok { color:var(--ok); }
+  .st { font-size:.8rem; font-weight:600; padding:3px 10px; border-radius:99px; background:rgba(210,153,34,.15); color:var(--warn); }
+  .st.ok { background:var(--green-soft); color:var(--green); }
 
-  /* mala */
-  .checklist { margin-top:28px; background:var(--card); border:1px solid var(--line); border-radius:22px; overflow:hidden; }
-  .checklist label { display:flex; gap:14px; align-items:center; padding:14px 20px; border-top:1px solid var(--line); cursor:pointer; min-height:52px; }
+  .checklist { margin-top:28px; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .checklist label { display:flex; gap:14px; align-items:center; padding:14px 18px; border-top:1px solid var(--line); cursor:pointer; min-height:52px; }
   .checklist label:first-child { border-top:0; }
-  .checklist input { width:22px; height:22px; accent-color:var(--teal); flex:none; }
+  .checklist input { width:22px; height:22px; accent-color:var(--btn); flex:none; }
   .checklist input:checked + span { text-decoration:line-through; color:var(--muted); }
   .count { color:var(--muted); font-size:.9rem; margin-top:10px; }
 
-  footer { margin-top:80px; padding:36px 20px calc(40px + var(--safe-b)); text-align:center; color:var(--muted); font-size:.82rem; border-top:1px solid var(--line); }
-  footer .sig { font-family:var(--serif); font-size:1.3rem; color:var(--ink); margin-bottom:10px; }
+  footer { margin-top:90px; padding:36px 20px calc(120px + var(--safe-b)); text-align:center; color:var(--muted); font-size:.82rem; border-top:1px solid var(--line); }
+  footer .sig { font-size:1.25rem; font-weight:700; color:var(--ink); margin-bottom:10px; }
   footer p { max-width:60ch; margin:6px auto 0; }
+
+  /* barra fixa de pagamento (aparece depois do topo) */
+  .dock { position:fixed; left:0; right:0; bottom:0; z-index:50; padding:12px 16px calc(12px + var(--safe-b)); background:linear-gradient(180deg,transparent,rgba(13,17,23,.92) 40%); transform:translateY(120%); transition:transform .35s; pointer-events:none; }
+  .dock.on { transform:none; }
+  .dock .btn { width:100%; max-width:520px; margin:0 auto; display:flex; min-height:56px; font-size:1.05rem; font-weight:700; border-radius:10px; pointer-events:auto; background:linear-gradient(180deg,#2ea043,#238636); box-shadow:0 8px 30px rgba(35,134,54,.5); }
 
   .reveal { opacity:0; transform:translateY(20px); transition:opacity .7s, transform .7s; }
   .reveal.in { opacity:1; transform:none; }
-  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } .reveal { opacity:1; transform:none; } html { scroll-behavior:auto; } }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } .reveal { opacity:1; transform:none; } html { scroll-behavior:auto; } }
 </style>
 </head>
 <body>
 
-<header class="hero">
+<header class="hero" id="top">
   <img src="fotos/prainha.jpg" alt="Prainha de Arraial do Cabo, com água verde e areia clara" fetchpriority="high">
   <div class="wrap">
-    <p class="tag">Nossa viagem · 6 amigos</p>
-    <h1>Arraial<br><i>do Cabo</i></h1>
+    <span class="badge">Nossa viagem · 6 amigos</span>
+    <h1>Arraial do <span class="g">Cabo</span></h1>
     <p class="sub">Água azul, areia branquinha e a gente junto. Bora pro Caribe brasileiro.</p>
     <div class="btns">
-      <a class="btn main" href="pagamentos.html">Iniciar pagamentos</a>
-      <a class="btn line" href="#lugares">Conhecer o lugar</a>
+      <a class="btn cta" href="pagamentos.html" id="cta">Iniciar pagamentos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a class="btn ghost" href="#lugares">Conhecer o lugar</a>
     </div>
   </div>
 </header>
@@ -121,7 +130,7 @@
   <a class="pay reveal" href="pagamentos.html">
     <div class="pay-top">
       <div><div class="kicker">Pagamentos</div><div class="big"><span id="paidN">–</span> <small id="ofN">parcelas pagas</small></div></div>
-      <span class="go">Ver quem falta →</span>
+      <span class="btn">Ver quem falta →</span>
     </div>
     <div class="bar"><i id="bar"></i></div>
     <p id="payText">Carregando…</p>
@@ -129,7 +138,7 @@
 
   <section class="block reveal" id="lugares">
     <div class="kicker">O destino</div>
-    <h2>Um pedaço do <em>Caribe</em> no Rio</h2>
+    <h2>Um pedaço do <span class="g">Caribe</span> no Rio</h2>
     <p class="intro">Arraial do Cabo tem das águas mais claras do país, praias bem diferentes entre si e passeios de barco que valem cada minuto. Esses são alguns lugares pra ir sonhando.</p>
     <div class="places">
       <article class="place wide"><div class="ph"><img src="fotos/praia-grande.jpg" alt="Praia Grande, com areia branca e mar verde" loading="lazy"></div>
@@ -150,13 +159,13 @@
 
   <section class="block reveal">
     <div class="kicker">A turma</div>
-    <h2>Quem vai <em>junto</em></h2>
+    <h2>Quem vai <span class="g">junto</span></h2>
     <div class="squad" id="squad"></div>
   </section>
 
   <section class="block reveal">
     <div class="kicker">Antes de ir</div>
-    <h2>O que levar na <em>mala</em></h2>
+    <h2>O que levar na <span class="g">mala</span></h2>
     <div class="checklist" id="check"></div>
     <div class="count" id="checkCount"></div>
   </section>
@@ -167,22 +176,27 @@
   <p>Fotos de Arraial do Cabo via Wikimedia Commons: Noel Portugal (CC BY 2.0); Edulonde, Jose Muniz, Ivolindbergh e TMbux (CC BY-SA 3.0); Adriane Rado (CC BY-SA 4.0).</p>
 </footer>
 
+<div class="dock" id="dock"><a class="btn" href="pagamentos.html">Iniciar pagamentos →</a></div>
+
 <script>
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 const TRIP_DATE = ''; // ex.: '2026-12-20' liga o "Faltam X dias"
 const PEOPLE = [
-  { n:'2t bigode', c:'#0f6b73', role:'Passagens' },
-  { n:'Arthur', c:'#5b7c3a', role:'' },
-  { n:'Laryssa', c:'#c2566d', role:'' },
-  { n:'Gabi', c:'#b9833a', role:'' },
-  { n:'Victor', c:'#4f6fa8', role:'' },
-  { n:'Isa', c:'#7b5ea7', role:'Hospedagem' },
+  { n:'2t bigode', c:'#238636', role:'Passagens' },
+  { n:'Arthur', c:'#1f6feb', role:'' },
+  { n:'Laryssa', c:'#bf3989', role:'' },
+  { n:'Gabi', c:'#9e6a03', role:'' },
+  { n:'Victor', c:'#da3633', role:'' },
+  { n:'Isa', c:'#8957e5', role:'Hospedagem' },
 ];
 const TODO = ['Protetor solar', 'Roupa de banho', 'Chapéu ou boné', 'Óculos de sol', 'Toalha de praia', 'Carregador e power bank', 'Chinelo', 'Documento com foto', 'Repelente'];
 
 const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { threshold:.1 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+// mostra a barra fixa quando o botão do topo sai da tela
+new IntersectionObserver(([e]) => $('dock').classList.toggle('on', !e.isIntersecting)).observe($('cta'));
 
 // clima (Open-Meteo, sem chave)
 fetch('https://api.open-meteo.com/v1/forecast?latitude=-22.9661&longitude=-42.0278&current=temperature_2m&timezone=auto')

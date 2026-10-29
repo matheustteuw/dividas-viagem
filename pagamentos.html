@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f6f0e6">
+<meta name="theme-color" content="#0d1117">
 <title>Pagamentos · Arraial do Cabo</title>
 <style>
   :root {
@@ -91,6 +91,19 @@
   @keyframes in { from { opacity:0; transform:translateY(-24px) scale(.96); } }
   @keyframes out { to { opacity:0; transform:translateY(-16px) scale(.96); } }
 
+  /* tema escuro verde, igual à Home */
+  :root { --bg:#0d1117; --card:#161b22; --text:#f0f6fc; --muted:#8b949e; --line:#30363d; --fill:#21262d;
+    --brand:#3fb950; --brand-soft:rgba(46,160,67,.15); --ok:#3fb950; --ok-soft:rgba(46,160,67,.15); --warn:#d29922; --warn-soft:rgba(210,153,34,.15); --danger:#f85149; --shadow:none; color-scheme:dark; }
+  body { font-family:"Mona Sans VF",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif; }
+  header h1 { font-family:inherit; font-weight:700; letter-spacing:-.03em; }
+  .btn { background:#238636; border:1px solid rgba(240,246,252,.15); border-radius:8px; }
+  .btn.soft { background:var(--brand-soft); color:var(--brand); border-color:rgba(63,185,80,.3); }
+  .btn.ghost { background:var(--fill); }
+  .btn.ok { background:#238636; }
+  .bar i { background:var(--ok); }
+  .toast.err .ic { background:rgba(248,81,73,.15); }
+  .card { border-radius:12px; }
+  .tabs button.on { background:var(--card); }
   @media (max-width:520px) {
     dialog { width:100%; max-width:none; margin:auto 0 0; border-radius:28px 28px 0 0; animation:sheet .3s cubic-bezier(.2,.9,.3,1); }
     @keyframes sheet { from { transform:translateY(100%); } }
@@ -144,7 +157,7 @@ const brl = (n) => n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' 
 const fmt = (d) => d.split('-').reverse().join('/');
 const today = () => new Date().toLocaleDateString('sv'); // AAAA-MM-DD no fuso local
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-const COLORS = { '2t bigode':'#0f6b73', Arthur:'#5b7c3a', Laryssa:'#c2566d', Gabi:'#b9833a', Victor:'#4f6fa8', Isa:'#7b5ea7' };
+const COLORS = { '2t bigode':'#238636', Arthur:'#1f6feb', Laryssa:'#bf3989', Gabi:'#9e6a03', Victor:'#da3633', Isa:'#8957e5' };
 const PIX = { '2t bigode': { key:'11977956356', info:'Matheus Pimentel · Nubank' } }; // chave de quem recebe
 const ICON = {
   check:'<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
